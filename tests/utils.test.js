@@ -23,6 +23,21 @@ describe('utils path', function () {
     expect(result).toBeTruthy()
   })
 
+  it('should match a path with a dash', function () {
+    const result = utils.checkPath('/pet/-93114376/uploadImage', '/pet/{petId}/uploadImage')
+    expect(result).toBeTruthy()
+  })
+
+  it('shouldn\'t match a path that is longer', function () {
+    const result = utils.checkPath('/pet/-93114376/uploadImage', '/pet/{petId}')
+    expect(result).toBeFalsy()
+  })
+
+  it('should match a path with percentages', function () {
+    const result = utils.checkPath('/user/ad%20labore', '/user/{username}')
+    expect(result).toBeTruthy()
+  })
+
   it('should match a path with dashes', function () {
     const result = utils.checkPath('/users/e64e18e9-d01b-4378-bf98-b4d21e307793/modules/68d902bf-07e9-4fd1-ab18-f17362de3608', '/users/{userId}/modules/{id}')
     expect(result).toBeTruthy()

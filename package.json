@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "standard \"**/*.js\"",
     "test": "jest",
+    "pack": "npm pack",
     "publish:local": "npm pack && npm i -g newman-reporter-openapi-0.0.1.tgz",
     "dev": "npm run "
   },
@@ -24,9 +25,10 @@
     "standard": "^16.0.4"
   },
   "dependencies": {
+    "@apideck/portman": "^1.12.1",
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
-    "deasync": "^0.1.24",
-    "lodash": "^4.17.21"
+    "cli-table3": "0.6.0",
+    "colors": "1.4.0"
   },
   "standard": {
     "env": [

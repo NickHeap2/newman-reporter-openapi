@@ -1,0 +1,21 @@
+{
+  "name": "newman-reporter-openapi-tester",
+  "version": "0.0.1",
+  "description": "Newman reporter for openapi coverage tester",
+  "scripts": {
+    "start": ".\\node_modules\\.bin\\portman --cliOptionsFile portman/portman-cli.json --newmanOptionsFile portman/newman-options.json"
+  },
+  "files": [
+    "lib/**"
+  ],
+  "author": {
+    "name": "Nick Heap",
+    "email": "nickheap@gmail.com",
+    "url": "https://github.com/NickHeap2"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@apideck/portman": "^1.12.1",
+    "newman-reporter-openapi": "file:../newman-reporter-openapi-0.0.1.tgz"
+  }
+}
