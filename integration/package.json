@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Newman reporter for openapi coverage tester",
   "scripts": {
-    "start-petstore": ".\\node_modules\\.bin\\portman --baseUrl http://127.0.0.1:4010 --cliOptionsFile petstore-portman/portman-cli.json --newmanOptionsFile petstore-portman/newman-options.json",
+    "start-petstore": ".\\node_modules\\.bin\\portman --baseUrl http://127.0.0.1:4010 --cliOptionsFile petstore-portman/portman-cli.json --newmanOptionsFile petstore-portman/newman-options.json"
   },
   "files": [
     "lib/**"
