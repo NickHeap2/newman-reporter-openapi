@@ -1,0 +1,9 @@
+{
+  "local": "./petstore-openapi.yaml",
+  "output": "petstore-collection.postman.json",
+  "portmanConfigFile": "./petstore-portman/portman-config.json",
+  "includeTests": true,
+  "syncPostman": true,
+  "runNewman": true,
+  "baseUrl": "http://127.0.0.1:4010"
+}

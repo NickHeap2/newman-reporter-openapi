@@ -1,9 +1,0 @@
-{
-  "reporters": [ "cli", "openapi" ],
-  "reporter": {
-    "openapi": {
-      "spec": "./openapi.yaml",
-      "verbose": true
-    }
-  }
-}

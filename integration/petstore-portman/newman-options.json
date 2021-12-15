@@ -1,0 +1,13 @@
+{
+  "reporters": [ "cli", "openapi" ],
+  "reporter": {
+    "openapi": {
+      "spec": "./petstore-openapi.yaml",
+      "exportFilename": "petstore-openapi-coverage.json",
+      "serverUrl": "http://127.0.0.1:4010",
+      "debug": false,
+      "reportstyle": "wide"
+    }
+  },
+  "verbose": true
+}

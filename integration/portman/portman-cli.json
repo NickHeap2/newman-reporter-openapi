@@ -1,7 +1,0 @@
-{
-  "local": "./swagger-petstore.yaml",
-  "output": "collection.postman.json",
-  "includeTests": true,
-  "syncPostman": true,
-  "runNewman": true
-}
