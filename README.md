@@ -83,7 +83,7 @@ wide - best for when your spec has many different paths (the default)
 ![wide](https://github.com/NickHeap2/newman-reporter-openapi/blob/367b9daf8710e8e1f3f4b614604a27fecac7eaab/images/wide_report.png)
 
 tall - an option for APIs with a small number of paths otherwise it can get too tall
-![tall](https://github.com/NickHeap2/newman-reporter-openapi/blob/367b9daf8710e8e1f3f4b614604a27fecac7eaab/images/tall_report.png)
+![tall](https://github.com/NickHeap2/newman-reporter-openapi/blob/2a95a92573fb1678fa03594f52c9648b1bc1921a/images/tall_report.png)
 
 summary - for a basic summary of the coverage without path or response details
 ![summary](https://github.com/NickHeap2/newman-reporter-openapi/blob/367b9daf8710e8e1f3f4b614604a27fecac7eaab/images/summary_report.png)
