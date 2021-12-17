@@ -1,11 +1,23 @@
 {
   "name": "newman-reporter-openapi",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Newman reporter for OpenAPI coverage",
   "repository": {
     "type": "git",
     "url": "https://github.com/NickHeap2/newman-reporter-openapi.git"
   },
+  "keywords": [
+    "api",
+    "api testing",
+    "coverage",
+    "newman",
+    "newman-reporter",
+    "newman reporter",
+    "openapi",
+    "portman",
+    "postman",
+    "reporter"
+  ],
   "main": "lib/index.js",
   "scripts": {
     "lint": "standard \"**/*.js\"",
