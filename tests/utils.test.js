@@ -1,6 +1,47 @@
 /* globals describe it expect */
 const utils = require('../lib/utils')
 
+describe('utils dereference', function () {
+  beforeEach(() => {
+    utils.setSchema(undefined)
+  })
+
+  it('should load a valid spec and resolve it', async function () {
+    await utils.dereference('tests/valid-schema.yaml')
+    const schema = utils.getSchema()
+    expect(schema).toBeDefined()
+
+    expect(schema).toHaveProperty(['paths', '/refpath', 'get', 'summary'])
+    expect(schema.paths['/refpath'].get.summary).toEqual('Get a refpath')
+    expect(schema).not.toHaveProperty('callCount')
+
+    // console.log(JSON.stringify(schema, null, 2))
+  })
+  it('should not dereference an invalid spec', async function () {
+    await utils.dereference('tests/invalid-schema.yaml')
+    const schema = utils.getSchema()
+    expect(schema).not.toBeDefined()
+  })
+})
+describe('utils initialise', function () {
+  beforeEach(() => {
+    utils.setSchema(undefined)
+  })
+
+  it('should initialise a valid spec', async function () {
+    await utils.initialise('tests/valid-schema.yaml')
+    const schema = utils.getSchema()
+    expect(schema).toBeDefined()
+
+    expect(schema).toHaveProperty(['paths', '/refpath', 'get', 'summary'])
+    expect(schema.paths['/refpath'].get.summary).toEqual('Get a refpath')
+    expect(schema).toHaveProperty('callCount')
+    expect(schema.callCount).toEqual(0)
+
+    // console.log(JSON.stringify(schema, null, 2))
+  })
+})
+
 describe('utils path', function () {
   it('should match a path', function () {
     const result = utils.checkPath('/test/path', '/test/path')

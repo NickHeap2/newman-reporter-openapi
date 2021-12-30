@@ -1,6 +1,6 @@
 {
   "name": "newman-reporter-openapi",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Newman reporter for OpenAPI coverage",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "lint": "standard \"**/*.js\"",
     "test": "jest",
     "pack": "npm pack",
-    "install:local": "npm pack && npm i -g newman-reporter-openapi-0.0.1.tgz"
+    "install:local": "npm pack && npm i -g newman-reporter-openapi-0.0.6.tgz"
   },
   "files": [
     "lib/**"

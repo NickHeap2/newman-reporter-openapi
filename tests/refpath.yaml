@@ -1,0 +1,6 @@
+get:
+  tags:
+  - refpath
+  summary: Get a refpath
+  description: Get a refpath
+  operationId: getRefpath

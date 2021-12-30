@@ -1,0 +1,15 @@
+---
+openapi: 3.0.0
+info:
+  title: "Refpath spec"
+  description: "Refpath spec"
+  version: 0.0.1
+  contact:
+    email: "me@mail.com"
+servers:
+- url: "/api"
+tags:
+- name: refpath
+paths:
+  /refpath:
+    $ref: "missing-refpath.yaml"
