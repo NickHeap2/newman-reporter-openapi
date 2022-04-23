@@ -1,6 +1,6 @@
 {
   "name": "newman-reporter-openapi",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Newman reporter for OpenAPI coverage",
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   ],
   "main": "lib/index.js",
   "scripts": {
+    "debug": "newman",
     "lint": "standard \"**/*.js\"",
     "test": "jest",
     "pack": "npm pack",
@@ -35,15 +36,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/jest": "^27.0.3",
-    "jest": "^27.0.0",
-    "standard": "^16.0.4"
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1",
+    "standard": "^17.0.0"
   },
   "dependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",
-    "deasync": "^0.1.24",
-    "cli-table3": "0.6.0",
-    "colors": "1.4.0"
+    "deasync": "^0.1.26",
+    "cli-table3": "^0.6.2",
+    "colors": "^1.4.0"
   },
   "standard": {
     "env": [

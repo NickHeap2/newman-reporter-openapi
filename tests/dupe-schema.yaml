@@ -1,0 +1,37 @@
+---
+openapi: 3.0.0
+info:
+  title: "Refpath spec"
+  description: "Refpath spec"
+  version: 0.0.1
+  contact:
+    email: "me@mail.com"
+servers:
+- url: "/api"
+tags:
+- name: refpath
+paths:
+  /refpath:
+    get:
+      tags:
+      - get
+      summary: Get a refpath
+      description: Get a refpath
+      operationId: getRefpath
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: dupe-ref.yaml
+
+    post:
+      tags:
+      - post
+      summary: Post a refpath
+      description: Post a refpath
+      operationId: postRefpath
+      responses:
+        "201":
+          description: Created
+        "400":
+          $ref: dupe-ref.yaml
