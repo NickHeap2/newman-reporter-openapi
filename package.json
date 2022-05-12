@@ -1,6 +1,6 @@
 {
   "name": "newman-reporter-openapi",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Newman reporter for OpenAPI coverage",
   "repository": {
     "type": "git",
