@@ -1,0 +1,139 @@
+---
+openapi: 3.0.0
+info:
+  title: "Path ordering spec"
+  description: "Path ordering spec"
+  version: 0.0.1
+  contact:
+    email: "me@mail.com"
+servers:
+- url: "/api"
+tags:
+- name: refpath
+paths:
+  /resource/{resourceId}:
+    get:
+      tags:
+      - get
+      summary: Get a resource
+      description: Get a resource
+      operationId: getResource
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /resource/getall:
+    get:
+      tags:
+      - get
+      summary: Get all resources
+      description: Get all resources
+      operationId: getBulkResource
+      responses:
+        "200":
+          description: OK
+  /correctorder/getall:
+    get:
+      tags:
+      - get
+      summary: Get all resources
+      description: Get all resources
+      operationId: getCorrectOrder1
+      responses:
+        "200":
+          description: OK
+  /correctorder/{resourceId}:
+    get:
+      tags:
+      - get
+      summary: Get a resource
+      description: Get a resource
+      operationId: getCorrectOrder2
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /resource/{resourceId}/subresourceB/{subresourceBId}:
+    get:
+      tags:
+      - get
+      summary: Get a B resource
+      description: Get a B resource
+      operationId: getResourceB
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: subresourceBId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /resource/{resourceId}/subresourceA/{subresourceAId}:
+    get:
+      tags:
+      - get
+      summary: Get a A resource
+      description: Get a A resource
+      operationId: getResourceA
+      parameters:
+        - in: path
+          name: resourceId
+          required: true
+          schema:
+            type: string
+        - in: path
+          name: subresourceAId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /ambiguous/{firstId}:
+    get:
+      tags:
+      - get
+      summary: Get an ambiguous
+      description: Get an ambiguous
+      operationId: getFirst
+      parameters:
+        - in: path
+          name: firstId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+  /ambiguous/{secondId}:
+    get:
+      tags:
+      - get
+      summary: Get an ambiguous
+      description: Get an ambiguous
+      operationId: getSecond
+      parameters:
+        - in: path
+          name: secondId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK

@@ -1,6 +1,12 @@
 /* globals describe it expect */
 const Tracker = require('../lib/tracker')
 
+global.console = {
+  warn: jest.fn(),
+  log: jest.fn(),
+  error: jest.fn()
+}
+
 let tracker
 
 describe('utils dereference', function () {
@@ -556,5 +562,127 @@ describe('dupe ref scenario', function () {
 
     expect(coverage['/refpath'].get).toHaveProperty('responses.400')
     expect(coverage['/refpath'].get.responses['400'].callCount).toEqual(1)
+  })
+})
+
+describe('path ordering scenario', function () {
+  beforeEach(() => {
+    tracker = new Tracker()
+    tracker.logError = jest.fn()
+
+    jest.resetAllMocks()
+  })
+
+  it('should work correctly with concrete', async function () {
+    await tracker.initialise('tests/path-ordering.yaml')
+    const schema = tracker.getSchema()
+    expect(schema).toBeDefined()
+
+    const server = '/api'
+
+    tracker.updateOperation(`${server}/resource/123/subresourceA/456`, 'GET', '200')
+    tracker.updateOperation(`${server}/resource/getall`, 'GET', '200')
+    tracker.updateOperation(`${server}/correctorder/getall`, 'GET', '200')
+
+    const coverage = tracker.createCoverage()
+
+    let resource = '/resource/{resourceId}/subresourceA/{subresourceAId}'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(1)
+
+    resource = '/resource/{resourceId}/subresourceB/{subresourceBId}'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(0)
+
+    resource = '/resource/getall'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(1)
+
+    resource = '/resource/{resourceId}'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(0)
+
+    resource = '/correctorder/getall'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(1)
+
+    resource = '/correctorder/{resourceId}'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(0)
+  })
+
+  it('should work correctly with reverse', async function () {
+    await tracker.initialise('tests/path-ordering.yaml')
+    const schema = tracker.getSchema()
+    expect(schema).toBeDefined()
+
+    const server = '/api'
+
+    tracker.updateOperation(`${server}/resource/123/subresourceB/456`, 'GET', '200')
+    tracker.updateOperation(`${server}/resource/123`, 'GET', '200')
+    tracker.updateOperation(`${server}/correctorder/123`, 'GET', '200')
+
+    const coverage = tracker.createCoverage()
+
+    let resource = '/resource/{resourceId}/subresourceA/{subresourceAId}'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(0)
+
+    resource = '/resource/{resourceId}/subresourceB/{subresourceBId}'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(1)
+
+    resource = '/resource/getall'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(0)
+
+    resource = '/resource/{resourceId}'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(1)
+
+    resource = '/correctorder/getall'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(0)
+
+    resource = '/correctorder/{resourceId}'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(1)
+  })
+
+  it('should work correctly with ambiguous', async function () {
+    await tracker.initialise('tests/path-ordering.yaml')
+    const schema = tracker.getSchema()
+    expect(schema).toBeDefined()
+
+    const server = '/api'
+
+    tracker.updateOperation(`${server}/ambiguous/123`, 'GET', '200')
+
+    const coverage = tracker.createCoverage()
+
+    expect(tracker.logError).toBeCalledTimes(1)
+    expect(tracker.logError).toBeCalledWith('Error: Ambiguous or no matching path!!!', { code: '200', method: 'GET', relativeUrl: '/ambiguous/123', server: '/api', url: '/api/ambiguous/123' })
+
+    let resource = '/ambiguous/{firstId}'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(0)
+
+    resource = '/ambiguous/{secondId}'
+    expect(coverage).toHaveProperty(resource)
+    expect(coverage[resource]).toHaveProperty('callCount')
+    expect(coverage[resource].callCount).toEqual(0)
   })
 })
